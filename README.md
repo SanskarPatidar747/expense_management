@@ -9,7 +9,7 @@ Thanks for checking out the project! The Spring Boot + MongoDB backend lives in 
 - Port `8080` free for the backend (feel free to change `server.port` if something is already there)
 
 ## 1. Grab the Code
-Make sure the GitHub repo actually contains the backend and frontend folders (the public repo at [SanskarPatidar747/expense_management](https://github.com/SanskarPatidar747/expense_management) is currently empty, so push your local code there first). Once it’s populated:
+(https://github.com/SanskarPatidar747/expense_management) is currently empty, so push your local code there first). Once it’s populated:
 ```powershell
 git clone https://github.com/SanskarPatidar747/expense_management.git
 cd expense_management
