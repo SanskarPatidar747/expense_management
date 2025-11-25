@@ -29,6 +29,8 @@ cd expense_management
    mvn spring-boot:run
    ```
    You’ll get REST endpoints at `http://localhost:8080/api`. If the port is busy, either free it up or tweak `server.port` in `application.properties`.
+4. Hosted instance (Render):  
+   The Spring Boot API is deployed at `https://expense-backend-g60e.onrender.com/api`. Make sure your Mongo Atlas credentials stay in the `MONGODB_URI` env var when you redeploy.
 
 ## 3. Launch the Flutter App
 1. From the repo root:
@@ -38,11 +40,12 @@ cd expense_management
    ```
 2. Run on any target you like:
    ```powershell
-   flutter run -d windows   # or chrome / macos / android / ios
+   flutter run -d chrome --dart-define API_BASE_URL=https://expense-backend-g60e.onrender.com/api
+   # swap -d chrome for windows / macos / android / ios
    ```
-   - Defaults to `http://localhost:8080/api`
-   - Need a different backend URL? Add `--dart-define API_BASE_URL=http://<host>:<port>/api`
-   - Android emulator? It automatically swaps to `http://10.0.2.2:8080/api`
+   - By default the app now points at the hosted backend `https://expense-backend-g60e.onrender.com/api`.
+   - Need a different backend URL (e.g., local dev)? Add `--dart-define API_BASE_URL=http://localhost:8080/api`.
+   - Android emulator still falls back to `http://10.0.2.2:8080/api` if you don’t provide a dart define.
 
 ## 4. Headers (So Things Don’t Break)
 - The API expects an `X-USER-ID` header. The Flutter app takes care of it after login, so you shouldn’t have to fiddle with Postman or anything unless you want to.

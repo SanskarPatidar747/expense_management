@@ -23,9 +23,9 @@ class ApiConfig {
   }
 
   static String _resolveBaseUrl() {
-    const override = String.fromEnvironment('API_BASE_URL');
-    if (override.isNotEmpty) {
-      return override;
+    const directOverride = String.fromEnvironment('API_BASE_URL');
+    if (directOverride.isNotEmpty) {
+      return directOverride;
     }
 
     if (kIsWeb && Uri.base.hasAuthority) {
@@ -37,7 +37,18 @@ class ApiConfig {
       return 'http://10.0.2.2:8080/api';
     }
 
-    return 'http://localhost:8080/api';
+    if (!kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.iOS ||
+            defaultTargetPlatform == TargetPlatform.macOS)) {
+      return 'http://localhost:8080/api';
+    }
+
+    const hostedOverride = String.fromEnvironment('HOSTED_API_BASE_URL');
+    if (hostedOverride.isNotEmpty) {
+      return hostedOverride;
+    }
+
+    return 'https://expense-backend-g60e.onrender.com/api';
   }
 
   static Uri _buildUri(String path, {Map<String, String>? query}) {
