@@ -1,11 +1,10 @@
 services:
   - type: web
     name: expense-backend
-    env: java
+    env: docker
     rootDir: Backend
     plan: free
-    buildCommand: chmod +x mvnw && ./mvnw clean package
-    startCommand: java -jar target/expense-backend-0.0.1-SNAPSHOT.jar
+    dockerfilePath: Dockerfile
     envVars:
       - key: MONGODB_URI
         sync: false
